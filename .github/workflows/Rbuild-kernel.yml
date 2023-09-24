@@ -4,9 +4,14 @@ on:
     types: [started]
 
   workflow_dispatch:
+    inputs:
+      pseudo_make:
+        description: "Pseudo Make"
+        type: boolean
+        default: false
 
 schedule:
-  - cron: "0 0 12 * *"
+  - cron: "50 9,21 * * *"
 
 jobs:
   build:
