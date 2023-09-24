@@ -293,6 +293,23 @@ jobs:
             echo "Boot image is empty"
             exit 1
         fi
+
+    - name: 发布zip包
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: kernelsu${{ env.KERNEL_IMAGE_NAME }}${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
+        body: |
+          Device:
+          ${{ env.device }}
+
+          Kernel:
+          https://github.com/${{ env.kernel_repository }}/tree/${{ env.kernel_commit_id }}
+
+          KernelSU:
+          https://github.com/tiann/KernelSU/releases/tag/${{ needs.check_kernelsu_update.outputs.kernelsu_release }}
+        files: |
+          out/arch/${{ env.ARCH }}/boot/${{ env.KERNEL_IMAGE_NAME }}
+          AnyKernel3/*
     
     - name: 上传Upload Image or Image.gz-dtb
       if: env.CHECK_FILE_IS_OK == 'true'
@@ -321,19 +338,4 @@ jobs:
       with:
         name: boot${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
         path: kernel_workspace/boot.img
-    - name: 发布zip包
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: kernelsu
-        body: |
-          Device:
-          ${{ env.device }}
-
-          Kernel:
-          https://github.com/${{ env.kernel_repository }}/tree/${{ env.kernel_commit_id }}
-
-          KernelSU:
-          https://github.com/tiann/KernelSU/releases/tag/${{ needs.check_kernelsu_update.outputs.kernelsu_release }}
-        files: |
-          out/arch/arm64/boot/*
-          AnyKernel3/*
+    
