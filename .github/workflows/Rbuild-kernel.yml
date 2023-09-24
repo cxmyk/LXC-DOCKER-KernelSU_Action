@@ -324,7 +324,7 @@ jobs:
     - name: 发布zip包
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ needs.check_kernelsu_update.outputs.kernelsu_release }}
+        tag_name: kernelsu
         body: |
           Device:
           ${{ env.device }}
