@@ -106,14 +106,13 @@ jobs:
     - name: Download kernel source
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        git clone https://github.com/wu17481748/android_kernel_4.14_oppo_mtk5g.git android-kernel --depth=1
-        git clone https://github.com/wu17481748/android_kernel_modules_oppo_mtk5g.git
+        git clone https://github.com/ArrowOS-Devices/android_kernel_xiaomi_nabu.git arrow-13.1 --depth=1
         mv android_kernel_modules_oppo_mtk5g/* ./
             
         
        
     - name: Setup LXC_DOCKER
-      if: env.LXC_DOCKER == 'true'
+      if: env.LXC_DOCKER == 'false'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc-docker-2config/LXC-DOCKER-OPEN-CONFIG.sh
@@ -122,7 +121,7 @@ jobs:
 
       
     - name: Setup LXC_PATCH
-      if: env.LXC_PATCH == 'true'
+      if: env.LXC_PATCH == 'false'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc/lxc.patch
