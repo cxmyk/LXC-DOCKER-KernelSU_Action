@@ -107,7 +107,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         git clone https://github.com/ArrowOS-Devices/android_kernel_xiaomi_nabu.git arrow-13.1 --depth=1
-        mv android_kernel_modules_oppo_mtk5g/* ./
+        mv android_kernel_xiaomi_nabu/* ./
             
         
        
